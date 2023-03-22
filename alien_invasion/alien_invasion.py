@@ -18,7 +18,9 @@ class AlienInvasion:
         self.settings = settings.Settings(self.blue)
         # self.blue_bg = settings.blue_bg(self.gray)
 
-        self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_hight))
+        self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+        self.settings.screen_width = self.screen.get_rect().width
+        self.settings.screen_height = self.screen.get_rect().height
         pygame.display.set_caption("Alien Invasion")
 
         self.ship = ship.Ship(self)
@@ -35,7 +37,6 @@ class AlienInvasion:
         # Redraw the screen during each pass through the loop.
         self.gray = (230, 230, 230)
         self.blue = (0, 0, 230)
-        self.settings = settings.Settings(self.blue)
         # self.blue_bg = settings.blue_bg(self.blue)
         self.screen.fill(self.settings.bg_color)
         self.ship.blitme()
@@ -44,7 +45,7 @@ class AlienInvasion:
         pygame.display.flip()
 
     def _check_events(self):
-        """Respond to keypresses and mouse events."""
+        """Respond to key presses and mouse events."""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
